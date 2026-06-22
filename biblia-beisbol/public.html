@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concurso Bíblico de Béisbol — Pantalla Pública</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/public.css" />
+</head>
+<body class="stadium-bg">
+
+<div class="pub-wrap">
+
+  <!-- ---------- encabezado: equipos + inning ---------- -->
+  <header class="pub-header">
+    <section class="team-panel" id="teamPanelA" data-team="0">
+      <div class="team-logo" id="logoA"></div>
+      <div class="team-meta">
+        <div class="eyebrow">Equipo</div>
+        <h2 class="h-display team-name" id="nameA">—</h2>
+        <div class="team-stats">
+          <div class="stat"><span class="scoreboard-num" id="scoreA">0</span><label>PTS</label></div>
+          <div class="stat"><span class="scoreboard-num" id="runsA">0</span><label>Carreras</label></div>
+          <div class="stat"><span class="scoreboard-num" id="outsA">0</span><label>Outs</label></div>
+          <div class="stat"><span class="scoreboard-num" id="tokensA">0</span><label>Fichas</label></div>
+        </div>
+        <div class="flag-row" id="flagsA"></div>
+      </div>
+      <div class="bat-indicator" id="batA" title="Al bate"></div>
+    </section>
+
+    <section class="inning-panel">
+      <div class="eyebrow">Inning</div>
+      <div class="inning-flip">
+        <span class="scoreboard-num inning-num" id="inningNow">1</span>
+        <span class="inning-sep">/</span>
+        <span class="scoreboard-num dim inning-num" id="inningMax">6</span>
+      </div>
+      <div class="badge" id="phaseBadge">Listo</div>
+      <div class="badge" id="connStatus" style="margin-top:4px;">○ Local</div>
+    </section>
+
+    <section class="team-panel team-panel--right" id="teamPanelB" data-team="1">
+      <div class="bat-indicator" id="batB" title="Al bate"></div>
+      <div class="team-meta team-meta--right">
+        <div class="eyebrow">Equipo</div>
+        <h2 class="h-display team-name" id="nameB">—</h2>
+        <div class="team-stats">
+          <div class="stat"><span class="scoreboard-num" id="tokensB">0</span><label>Fichas</label></div>
+          <div class="stat"><span class="scoreboard-num" id="outsB">0</span><label>Outs</label></div>
+          <div class="stat"><span class="scoreboard-num" id="runsB">0</span><label>Carreras</label></div>
+          <div class="stat"><span class="scoreboard-num" id="scoreB">0</span><label>PTS</label></div>
+        </div>
+        <div class="flag-row flag-row--right" id="flagsB"></div>
+      </div>
+      <div class="team-logo" id="logoB"></div>
+    </section>
+  </header>
+
+  <!-- ---------- diamante ---------- -->
+  <main class="pub-main">
+    <div class="diamond-stage">
+      <svg viewBox="0 0 400 360" class="diamond-svg" id="diamondSvg" aria-label="Diamante de béisbol">
+        <polygon points="200,40 340,180 200,320 60,180" fill="none" stroke="rgba(244,239,227,0.18)" stroke-width="2"/>
+        <!-- home -->
+        <rect x="186" y="296" width="28" height="28" rx="4" fill="rgba(244,239,227,0.12)" stroke="rgba(244,239,227,0.3)"/>
+        <!-- bases: 1ra derecha, 2da arriba, 3ra izquierda -->
+        <circle id="base1" class="base-dot" cx="320" cy="180" r="16" fill="rgba(244,239,227,0.12)" stroke="rgba(244,239,227,0.3)" stroke-width="2"/>
+        <circle id="base2" class="base-dot" cx="200" cy="60" r="16" fill="rgba(244,239,227,0.12)" stroke="rgba(244,239,227,0.3)" stroke-width="2"/>
+        <circle id="base3" class="base-dot" cx="80" cy="180" r="16" fill="rgba(244,239,227,0.12)" stroke="rgba(244,239,227,0.3)" stroke-width="2"/>
+        <circle id="runnerDot" class="runner-dot" cx="200" cy="320" r="9" fill="var(--amber)" opacity="0"/>
+      </svg>
+      <div class="diamond-center-label" id="drawingLabel" hidden></div>
+    </div>
+
+    <!-- ---------- tarjeta de pregunta (estilo pergamino) ---------- -->
+    <section class="question-stage">
+      <div class="parchment question-card" id="questionCard" hidden>
+        <div class="qc-top">
+          <span class="badge" id="qCategoria">Categoría</span>
+          <span class="badge badge--leather" id="qValor">100 pts</span>
+        </div>
+        <p class="h-scripture question-text" id="qTexto">—</p>
+        <p class="question-hint" id="qPista" hidden></p>
+      </div>
+      <div class="idle-prompt" id="idlePrompt">
+        <p class="eyebrow">Esperando selección de categoría…</p>
+      </div>
+    </section>
+
+    <!-- ---------- cronómetro ---------- -->
+    <section class="timer-stage" id="timerStage" hidden>
+      <svg viewBox="0 0 120 120" class="timer-ring">
+        <circle cx="60" cy="60" r="52" class="timer-ring-bg"/>
+        <circle cx="60" cy="60" r="52" class="timer-ring-fg" id="timerRingFg"/>
+      </svg>
+      <div class="timer-num scoreboard-num" id="timerNum">30</div>
+    </section>
+  </main>
+
+  <!-- ---------- banner de fly out ---------- -->
+  <div class="flyout-banner" id="flyoutBanner" hidden>
+    <span class="h-display">¡Oportunidad de Fly Out!</span>
+    <span id="flyoutTeam">—</span>
+  </div>
+
+  <!-- ---------- overlay de decisión de carrera (solo informativo en público) ---------- -->
+  <div class="overlay" id="runOverlay" hidden>
+    <div class="modal parchment">
+      <p class="eyebrow">¡Carrera completada!</p>
+      <h3 class="h-display" id="runTeamName">—</h3>
+      <p>El equipo está decidiendo: cobrar la carrera o convertirla en ficha especial…</p>
+    </div>
+  </div>
+
+  <!-- ---------- overlay de fin de juego ---------- -->
+  <div class="overlay" id="gameOverOverlay" hidden>
+    <div class="modal parchment" style="text-align:center;">
+      <p class="eyebrow">Resultado final</p>
+      <h1 class="h-display" id="winnerName" style="font-size:42px;margin:6px 0;">—</h1>
+      <p id="finalScore" style="font-size:18px;"></p>
+    </div>
+  </div>
+
+  <!-- capa de animaciones de jugada (hit/homerun/etc.) -->
+  <div class="anim-layer" id="animLayer" aria-hidden="true"></div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/public.js"></script>
+</body>
+</html>

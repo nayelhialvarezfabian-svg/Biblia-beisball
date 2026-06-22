@@ -1,0 +1,11 @@
+# netlify.toml — configuración de despliegue
+# No requiere "build command": son archivos estáticos (HTML/CSS/JS)
+# que no necesitan compilarse.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# El archivo netlify/functions/state.mjs ya se mapea a /api/state
+# mediante su propio "export const config = { path: '/api/state' }",
+# así que no hacen falta redirects manuales aquí.

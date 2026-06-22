@@ -1,0 +1,16 @@
+Carpeta opcional para soporte de Excel (.xlsx) real.
+
+Por defecto, el sistema importa/exporta preguntas en formato CSV
+(compatible con Excel: ábrelo y usa "Guardar como > CSV").
+
+Si prefieres importar archivos .xlsx directamente sin convertirlos:
+
+1. Descarga la librería SheetJS (xlsx.full.min.js) desde
+   https://cdn.sheetjs.com/ o https://github.com/SheetJS/sheetjs
+2. Coloca el archivo aquí: js/vendor/xlsx.full.min.js
+3. Agrega esta línea en admin.html, justo antes de <script src="js/csv.js">:
+   <script src="js/vendor/xlsx.full.min.js"></script>
+
+El sistema detecta automáticamente si la librería está presente
+(ver js/csv.js -> hasXLSXSupport()) y habilita la importación de
+.xlsx reales. Sin ella, todo sigue funcionando normalmente con CSV.

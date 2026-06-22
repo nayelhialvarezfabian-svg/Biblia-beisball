@@ -1,0 +1,88 @@
+/* ============================================================
+   admin.css — Panel del Administrador
+   ============================================================ */
+
+.admin-wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+
+.admin-topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+}
+
+.admin-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+.tab-btn {
+  background: var(--field-night-2); border: 1px solid var(--line-strong); color: var(--chalk-dim);
+  padding: 9px 16px; border-radius: 999px; font-weight: 700; font-size: 13px;
+}
+.tab-btn.active { background: var(--amber); color: var(--field-deepest); border-color: var(--amber); }
+
+.tab-pane { display: none; flex-direction: column; gap: 16px; }
+.tab-pane.active { display: flex; }
+
+.pad { padding: 20px; }
+.sec-title { font-size: 17px; margin: 0 0 14px; }
+.hint-text { font-size: 12px; color: var(--chalk-dim); margin: 6px 0; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+
+label {
+  display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--chalk-dim);
+  margin-bottom: 12px; font-weight: 600;
+}
+label.full { width: 100%; }
+label.radio-line { flex-direction: row; align-items: center; gap: 8px; font-weight: 500; }
+input[type=text], input[type=number], input[type=file], select, textarea {
+  background: var(--field-night-3);
+  border: 1px solid var(--line-strong);
+  color: var(--chalk);
+  border-radius: var(--radius-s);
+  padding: 9px 11px;
+  font-size: 14px;
+  font-family: var(--font-ui);
+}
+input[type=color] { width: 60px; height: 38px; padding: 2px; border-radius: var(--radius-s); border: 1px solid var(--line-strong); background: var(--field-night-3); }
+textarea { resize: vertical; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 16px; }
+
+.logo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+.logo-opt {
+  background: var(--field-night-3); border: 2px solid var(--line-strong); border-radius: var(--radius-s);
+  padding: 8px; display: flex; align-items: center; justify-content: center;
+}
+.logo-opt.selected { border-color: var(--amber); }
+.logo-opt svg { width: 36px; height: 36px; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.chip {
+  background: var(--field-night-3); border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 6px 12px; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.chip button { background: none; border: none; color: var(--danger); font-weight: 700; padding: 0; }
+.inline-form { display: flex; gap: 8px; }
+.inline-form input { flex: 1; }
+
+.q-filter-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.table-wrap { overflow-x: auto; }
+.q-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.q-table th, .q-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.q-table th { color: var(--amber); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+.q-table td.q-text { max-width: 320px; }
+.q-table button { font-size: 12px; padding: 6px 10px; margin-right: 4px; }
+
+.save-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--line);
+  gap: 8px; flex-wrap: wrap;
+}
+
+.toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  background: var(--leather); color: #2a0d08; padding: 12px 20px; border-radius: var(--radius-m);
+  font-weight: 700; z-index: 90; box-shadow: 0 10px 26px var(--shadow);
+  animation: popIn .2s ease;
+}
