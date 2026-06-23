@@ -1,9 +1,0 @@
-{
-  "name": "concurso-biblico-beisbol",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Concurso Bíblico de Béisbol — sistema interactivo de preguntas en vivo",
-  "dependencies": {
-    "@netlify/blobs": "latest"
-  }
-}
